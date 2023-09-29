@@ -1,0 +1,182 @@
+<div class="card my-3">
+    <h4>Booking detail</h4>
+    <div class="row my-3">
+        <div class="col-6 separator">
+            <h6>Your flight</h6>
+            <div class="row">
+                <div class="col-5">
+                    <img [src]="destination?.companyLogo" alt="..." />
+                </div>
+                <div class="col-7 d-flex">
+                    <ul class="list-group list-group-flush w-100">
+                        <li>
+                            <p><strong>{{destination?.cityDestination}}</strong></p>
+                        </li>
+                        <li>
+                            <p><span>{{destination?.duration}}</span></p>
+                        </li>
+                        <li>
+                        <i class="bi bi-airplane"></i>
+                        <span>
+                            <p><strong>{{destination?.from | date:'MMMM d, y, h:mm a'}}</strong></p>
+                            <p class="secondary">{{destination?.cityOrigin}}</p>
+                        </span>
+                        <i class="bi bi-airplane rotate"></i>
+                        <span>
+                            <p><strong>{{destination?.from | date:'MMMM d, y, h:mm a'}}</strong></p>
+                            <p class="secondary">{{destination?.cityDestination}}</p>
+                        </span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="col-6">
+        <h6>Your room</h6>
+        <div class="row">
+            <div class="col-5">
+                <img [src]="roomSelected?.photo" style="height: 120px; width: 120px;" alt="..." />
+            </div>
+            <div class="col-7">
+                <p><strong>{{roomSelected?.hotel}}</strong></p>
+                <p><strong>{{roomSelected?.type}}</strong></p>
+                <div class="d-flex">
+                    <div class="amenity">
+                    <i class="bi bi-tv"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+        </div>
+    </div>
+</div>
+
+<div class="container">
+    <div class="row">
+      <div class="col-md-6">
+        <h1>Información personal</h1>
+        <form #form="ngForm"  >
+            <div class="mb-3">
+                <label  class="form-label">First Name:</label>
+                <input type="text" [(ngModel)]="firstName" name="firstName" class="form-control" id="username" placeholder="Ingresa tu User" required maxlength="50"  #controlFirstName="ngModel">
+                <div *ngIf="controlFirstName.invalid && (controlFirstName.dirty || controlFirstName.touched)" style="color: red;">
+                <div *ngIf="controlFirstName.getError('required')">Debe ingresar un Nombre</div>
+                <div *ngIf="controlFirstName.getError('maxlength')">Debe ingresar un Nombre con menos de 50 caracteres</div>
+            </div>
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Last Name:</label>
+                <input type="text" [(ngModel)]="lastName" name="lastName" class="form-control" id="lastName" placeholder="Enter your last name" required maxlength="50" #controlLastName="ngModel">
+                <div *ngIf="controlLastName.invalid && (controlLastName.dirty || controlLastName.touched)" style="color: red;">
+                    <div *ngIf="controlLastName.getError('required')">Debe ingresar un Apellido</div>
+                    <div *ngIf="controlLastName.getError('maxlength')">Debe ingresar un Apellido con menos de 50 caracteres</div>
+                </div>
+            </div>
+            
+            <div class="mb-3">
+                <label class="form-label">Document Type:</label>
+                <select [(ngModel)]="documentType" name="documentType" class="form-control" required #controlDocumentType="ngModel">
+                    <option value="DNI">DNI</option>
+                    <option value="Pasaporte">Pasaporte</option>
+                </select>
+                <div *ngIf="controlDocumentType.invalid && (controlDocumentType.dirty || controlDocumentType.touched)" style="color: red;">
+                    <div *ngIf="controlDocumentType.getError('required')">Debe seleccionar un tipo de documento</div>
+                </div>
+            </div>
+            
+            <div class="mb-3">
+                <label class="form-label">Document Number:</label>
+                <input type="number" [(ngModel)]="documentNumber" name="documentNumber" class="form-control" id="documentNumber" placeholder="Enter your document number" required #controlDocumentNumber="ngModel">
+                <div *ngIf="controlDocumentNumber.invalid && (controlDocumentNumber.dirty || controlDocumentNumber.touched)" style="color: red;">
+                    <div *ngIf="controlDocumentNumber.getError('required')">Debe ingresar un número de documento</div>
+                </div>
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label">Dirección:</label>
+                <input type="text" [(ngModel)]="direccion" name="direccion" class="form-control" id="direccion" placeholder="Ingrese su dirección" required maxlength="500" #controlDireccion="ngModel">
+                <div *ngIf="controlDireccion.invalid && (controlDireccion.dirty || controlDireccion.touched)" style="color: red;">
+                    <div *ngIf="controlDireccion.getError('required')">Debe ingresar una dirección</div>
+                    <div *ngIf="controlDireccion.getError('maxlength')">La dirección debe tener menos de 500 caracteres</div>
+                </div>
+            </div>
+            
+            <div class="mb-3">
+                <label class="form-label">País:</label>
+                <input type="text" [(ngModel)]="pais" name="pais" class="form-control" id="pais" placeholder="Ingrese su país" required maxlength="100" #controlPais="ngModel">
+                <div *ngIf="controlPais.invalid && (controlPais.dirty || controlPais.touched)" style="color: red;">
+                    <div *ngIf="controlPais.getError('required')">Debe ingresar un país</div>
+                    <div *ngIf="controlPais.getError('maxlength')">El nombre del país debe tener menos de 100 caracteres</div>
+                </div>
+            </div>
+            
+            <div class="mb-3">
+                <label class="form-label">Ciudad:</label>
+                <input type="text" [(ngModel)]="ciudad" name="ciudad" class="form-control" id="ciudad" placeholder="Ingrese su ciudad" required maxlength="100" #controlCiudad="ngModel">
+                <div *ngIf="controlCiudad.invalid && (controlCiudad.dirty || controlCiudad.touched)" style="color: red;">
+                    <div *ngIf="controlCiudad.getError('required')">Debe ingresar una ciudad</div>
+                    <div *ngIf="controlCiudad.getError('maxlength')">El nombre de la ciudad debe tener menos de 100 caracteres</div>
+                </div>
+            </div>
+
+        </form>
+      </div>
+    </div>
+  </div>
+  <div class="container">
+    <div class="row">
+  <div class="col-md-6">
+    <h1>Información de la tarjeta</h1>
+    <form #paymentForm="ngForm" (ngSubmit)="submitPayment()">
+
+        <div class="form-group">
+            <label for="cardType">Tipo de tarjeta</label>
+            <select class="form-control" id="cardType" name="cardType" [(ngModel)]="cardType" required #cardTypeControl="ngModel">
+                <option value="Visa">Visa</option>
+                <option value="Mastercard">Mastercard</option>
+                <option value="American Express">American Express</option>
+            </select>
+            <div *ngIf="cardTypeControl.touched" style="color: red;">
+                <div *ngIf="cardTypeControl.getError('required')">Debe seleccionar un tipo de tarjeta.</div>
+            </div>
+        </div>
+    
+        <div class="form-group">
+            <label for="cardNumber">Número de tarjeta</label>
+            <input type="text" class="form-control" id="cardNumber" name="cardNumber" [(ngModel)]="cardNumber" required #cardNumberControl="ngModel" pattern="^[0-9]{4}-[0-9]{4}-[0-9]{4}-[0-9]{4}$" placeholder="XXXX-XXXX-XXXX-XXXX">
+            <div *ngIf="cardNumberControl.touched" style="color: red;">
+                <div *ngIf="cardNumberControl.getError('required')">Debe ingresar un número de tarjeta.</div>
+                <div *ngIf="cardNumberControl.getError('pattern')">El formato del número de tarjeta es inválido. Debe ser XXXX-XXXX-XXXX-XXXX.</div>
+            </div>
+        </div>
+    
+        <div class="form-group">
+            <label for="cardholderName">Nombre del titular de la tarjeta</label>
+            <input type="text" class="form-control" id="cardholderName" name="cardholderName" [(ngModel)]="cardholderName" required #cardholderNameControl="ngModel">
+            <div *ngIf="cardholderNameControl.touched" style="color: red;">
+                <div *ngIf="cardholderNameControl.getError('required')">Debe ingresar el nombre del titular.</div>
+            </div>
+        </div>
+    
+        <div class="form-group">
+            <label for="expirationDate">Fecha de caducidad</label>
+            <input type="date" class="form-control" id="expirationDate" name="expirationDate" [(ngModel)]="expirationDate" required #expirationDateControl="ngModel">
+            <div *ngIf="expirationDateControl.touched" style="color: red;">
+                <div *ngIf="expirationDateControl.getError('required')">Debe seleccionar una fecha de caducidad.</div>
+            </div>
+        </div>
+    
+        <div class="form-group">
+            <label for="cvv">CVV</label>
+            <input type="text" class="form-control" id="cvv" name="cvv" [(ngModel)]="cvv" required minlength="3" maxlength="4" #cvvControl="ngModel">
+            <div *ngIf="cvvControl.touched" style="color: red;">
+                <div *ngIf="cvvControl.getError('required')">Debe ingresar el CVV.</div>
+                <div *ngIf="cvvControl.getError('minlength') || cvvControl.getError('maxlength')">El CVV debe tener entre 3 y 4 dígitos.</div>
+            </div>
+        </div>
+    
+        <button type="submit" class="btn btn-primary" [disabled]="!paymentForm.valid || !form.valid">Realizar pago</button>
+    </form>
+    
+  </div>    
+</div>  </div>
